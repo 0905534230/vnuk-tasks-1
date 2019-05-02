@@ -3,7 +3,6 @@ package vn.edu.vnuk.tasks.sql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 public class Sql5010InsertIntoTasks {
 	
@@ -13,8 +12,7 @@ public class Sql5010InsertIntoTasks {
 	public Sql5010InsertIntoTasks(Connection connection) {
 		this.connection = connection;
 		
-		this.sqlQuery = "insert into tasks (description, is_complete, date_of_completion) "
-                +	"values (?, ?, ?)";
+		this.sqlQuery = "insert into tasks (description) values (?)";
 	}
 	
 	public void run() throws SQLException {
@@ -29,11 +27,11 @@ public class Sql5010InsertIntoTasks {
 
             //	Replacing "?" through values
             statement.setString(1, "Homework");
-            statement.setBoolean(2, true);
-            statement.setDate(3, new java.sql.Date(
-                            Calendar.getInstance().getTimeInMillis()
-                    )
-            );
+//            statement.setBoolean(2, true);
+//            statement.setDate(3, new java.sql.Date(
+//                            Calendar.getInstance().getTimeInMillis()
+//                    )
+//            );
 
             // 	Executing statement
 			statement.execute();

@@ -27,8 +27,7 @@ public class TaskDao {
     //  CREATE
     public void create(Task task) throws SQLException{
 
-        String sqlQuery = "insert into tasks (description, is_complete, date_of_completion) "
-                        +	"values (?, ?, ?)";
+        String sqlQuery = "insert into tasks (description) values (?)";
 
         PreparedStatement statement;
 
@@ -37,8 +36,8 @@ public class TaskDao {
 
                 //	Replacing "?" through values
                 statement.setString(1, task.getDescription());
-                statement.setBoolean(2, task.getIsComplete());
-                statement.setDate(3, new Date(task.getDateOfCompletion().getTimeInMillis()));
+//                statement.setBoolean(2, task.getIsComplete());
+//                statement.setDate(3, new Date(task.getDateOfCompletion().getTimeInMillis()));
 
                 // 	Executing statement
                 statement.execute();
@@ -151,7 +150,7 @@ public class TaskDao {
         try {
             PreparedStatement statement = connection.prepareStatement(sqlQuery);
             statement.setString(1, task.getDescription());
-            statement.setBoolean(2, task.getIsComplete());
+            statement.setBoolean(2, task.isComplete());
             statement.setDate(3, new Date(task.getDateOfCompletion().getTimeInMillis()));
             statement.setLong(4, task.getId());
             statement.execute();
