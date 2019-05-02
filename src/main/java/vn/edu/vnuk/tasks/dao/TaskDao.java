@@ -151,7 +151,12 @@ public class TaskDao {
             PreparedStatement statement = connection.prepareStatement(sqlQuery);
             statement.setString(1, task.getDescription());
             statement.setBoolean(2, task.isComplete());
-            statement.setDate(3, new Date(task.getDateOfCompletion().getTimeInMillis()));
+            
+            statement.setDate(
+            		3,
+            		task.getDateOfCompletion() == null ? null : new Date(task.getDateOfCompletion().getTimeInMillis())
+            	);
+            
             statement.setLong(4, task.getId());
             statement.execute();
             statement.close();
